@@ -1,7 +1,12 @@
 <template>
     <div>
         <h1>Home</h1>
-        <p v-show="token">api_token: {{ token }} </p>
+
+        <div v-if="token">
+            <p>api_token: {{ token }} </p>
+            <a @click="logout" class="button is-danger">Logout</a>
+        </div>
+
     </div>
 </template>
 
@@ -13,6 +18,14 @@
                 token: null
             }
         },
+        methods: {
+            logout() {
+                localStorage.removeItem('api_token');
+                this.token = null;
+                this.$router.push('login');
+            }
+        },
+
         created() {
             this.token = localStorage.getItem('api_token');
         }
