@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="container is-fluid">
         <h1>Home</h1>
 
         <div v-if="token">

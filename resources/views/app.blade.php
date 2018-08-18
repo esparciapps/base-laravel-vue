@@ -7,6 +7,8 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <title>Laravel 3</title>
+
+        <link rel="stylesheet" href="https://unpkg.com/buefy/lib/buefy.min.css">
     </head>
     <body>
         <div id="app">
@@ -18,6 +20,7 @@
             <script src="{{ mix('js/vendor.js') }}"></script>
         @endif
 
+        <script src="https://unpkg.com/buefy"></script>
         <script src="{{ mix('js/app.js') }}"></script>
 
     </body>
