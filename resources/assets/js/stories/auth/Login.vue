@@ -20,7 +20,7 @@
 </template>
 
 <script>
-    import api from '@/router/api';
+    import api from '@/api/api';
 
     export default {
         name: "Login",
@@ -31,16 +31,17 @@
             }
         },
         methods: {
-            sendForm() {
+            async sendForm() {
                 const data = {
                     email: this.email,
                     password: this.password
                 };
 
-                const { api_token } = axios.post(api.login.post, data).then(response => {
-                    localStorage.setItem('api_token', response.data.api_token);
-                    this.$router.push({ name: 'home' });
-                });
+                try {
+                    await api.auth.login(data);
+                } catch(error) {
+                    console.log(error);
+                }
             }
         }
     }
