@@ -24,7 +24,7 @@ const actions = {
     logout({ commit }) {
         commit('setToken', { token: null });
         commit('setUser', { user: null });
-    }
+    },
     // login({ commit }, { user, token }) {
     //     commit('setToken', { token });
     //     commit('setUser', { user });        

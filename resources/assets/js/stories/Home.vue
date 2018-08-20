@@ -11,7 +11,7 @@
 </template>
 
 <script>
-    import api from '@/api/api';
+    import api from '@/api';
 
     export default {
         name: "Home",
@@ -23,7 +23,7 @@
 
         computed: {
             token () {
-                return api.auth.token;
+                return api.auth.token();
             }
         }
     }

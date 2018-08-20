@@ -7,18 +7,19 @@
 </template>
 
 <script>
-    import api from '@/api/api';
+    import api from '@/api';
 
     export default {
         name: "User",
         computed: {
             user () {
-                return api.auth.user;
+                return api.auth.user();
             }
         },
         methods: {
-            ping () {
-                const response = api.ping();
+            async ping () {
+                const response = await api.ping();
+                console.log(response.data);
             }
         }
     }
