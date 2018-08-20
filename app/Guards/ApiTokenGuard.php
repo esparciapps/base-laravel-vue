@@ -35,12 +35,19 @@ class ApiTokenGuard implements Guard
             return $this->user;
         }
 
-        $token = $this->getTokenFromRequest();
-        $apiToken = ApiToken::whereApiToken($token)->first();
+        $apiToken = $this->apiToken();
 
         $user = optional($apiToken)->user;
 
         return $this->user = $user;
+    }
+
+    public function apiToken()
+    {
+        $token = $this->getTokenFromRequest();
+        $apiToken = ApiToken::whereApiToken($token)->first();
+
+        return $apiToken;
     }
 
     /**
