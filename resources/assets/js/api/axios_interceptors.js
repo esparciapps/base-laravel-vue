@@ -1,9 +1,9 @@
 import axios from 'axios';
 import router from '@/router';
-import api from './api';
+import api from './';
 
 axios.interceptors.request.use(request => {
-    const token = localStorage.getItem('api_token');
+    const token = api.auth.token();
     if (token) {
         request.headers.common['Authorization'] = `Bearer ${token}`;
     }

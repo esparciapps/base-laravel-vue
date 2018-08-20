@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Entities\ApiToken;
 
 class LoginController extends Controller
 {
@@ -21,6 +22,8 @@ class LoginController extends Controller
 
         $user = $this->guard()->user();
 
-        return ['api_token' => $user->api_token];
+        $token = factory(ApiToken::class)->create(['user_id' => $user->id]);
+
+        return ['api_token' => $token->api_token];
     }
 }

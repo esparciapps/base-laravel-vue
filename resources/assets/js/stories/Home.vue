@@ -11,23 +11,20 @@
 </template>
 
 <script>
+    import api from '@/api';
+
     export default {
         name: "Home",
-        data() {
-            return {
-                token: null
-            }
-        },
         methods: {
             logout() {
-                localStorage.removeItem('api_token');
-                this.token = null;
-                this.$router.push('login');
+                api.auth.logout();
             }
         },
 
-        created() {
-            this.token = localStorage.getItem('api_token');
+        computed: {
+            token () {
+                return api.auth.token();
+            }
         }
     }
 </script>
