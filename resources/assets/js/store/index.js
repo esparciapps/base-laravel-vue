@@ -3,6 +3,19 @@ import Vuex from 'vuex';
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
+import auth from './modules/auth';
 
+// import createPersistedState from 'vuex-persistedstate';
+
+const modules = {
+    auth
+};
+
+// const plugins = [
+//     createPersistedState()
+// ];
+
+export default new Vuex.Store({
+    modules,
+    // plugins
 });

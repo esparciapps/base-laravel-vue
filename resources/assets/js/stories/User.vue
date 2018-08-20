@@ -2,6 +2,7 @@
     <div>
         <h1>User</h1>
         <p>{{ user }}</p>
+        <button @click="ping">Ping</button>
     </div>
 </template>
 
@@ -10,14 +11,15 @@
 
     export default {
         name: "User",
-        data () {
-            return {
-                user: null,
-            };
+        computed: {
+            user () {
+                return api.auth.user;
+            }
         },
-
-        created() {
-            this.user = api.auth.me();
+        methods: {
+            ping () {
+                const response = api.ping();
+            }
         }
     }
 </script>
