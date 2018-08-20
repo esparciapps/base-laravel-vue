@@ -69,10 +69,6 @@ return [
             'driver' => 'eloquent',
             'model' => App\Entities\User::class,
         ],
-        'api_tokens' => [
-          'driver' => 'eloquent',
-          'model' => \App\Entities\ApiToken::class,
-        ]
 
         // 'users' => [
         //     'driver' => 'database',
