@@ -1,5 +1,6 @@
 import routes from './routes';
 import redirects from './router_redirects';
+import interceptors from './axios_interceptors';
 
 const api_token = 'api_token';
 
@@ -11,6 +12,16 @@ export default {
 
         isLoggedIn: function () {
             return localStorage.getItem(api_token) !== null;
+        },
+
+        me: async function () {
+            try {
+                const response = await axios.get('/api/me');
+
+                return response.data;
+            } catch (error) {
+                console.log(error);
+            }
         },
 
         login: async function (form) {
