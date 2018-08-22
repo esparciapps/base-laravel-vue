@@ -12,7 +12,10 @@
     "devDependencies": {
         "babel-preset-env": "^1.7.0",
         "cross-env": "^5.1",
-        "laravel-mix": "^2.0"
+        "laravel-mix": "^2.0",
+        "less": "^3.8.1",
+        "less-loader": "^4.1.0",
+        "tailwindcss": "^0.6.5"
     },
     "dependencies": {
         "axios": "^0.18.0",

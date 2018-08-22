@@ -1,6 +1,8 @@
 <template>
-    <div class="container is-fluid">
-        <h1>Home</h1>
+    <div class="">
+        <div class="flex justify-center items-center h-12 bg-red">
+            <h2 class="text-white">Home</h2>
+        </div>
 
         <div v-if="token">
             <p>api_token: {{ token }} </p>
