@@ -1,4 +1,5 @@
 import store from '@/store';
+import api from '@/api';
 
 export default {
     token: () => {
@@ -14,7 +15,7 @@ export default {
 
     getAuthenticatedUser: async () => {
         try {
-            const response = await axios.get('/api/me');
+            const response = await api.me.get();
 
             return response.data;
         } catch (error) {
@@ -24,21 +25,26 @@ export default {
 
     login: async (form) => {
         try {
-            const response = await axios.post('/login', form);
+            const response = await api.routes.login(form);
             const token = response.data.api_token;
             store.commit('setToken', { token });
             
             const user = await api.auth.getAuthenticatedUser();
             store.commit('setUser', { user });
 
-            redirects.home();
+            api.redirects.home();
         } catch (error) {
             console.log('error:', error);
         }
     },
 
-    logout: () => {
-        store.dispatch('logout');
-        redirects.login();
+    logout: async () => {
+        try {
+            await api.routes.logout();
+            store.dispatch('logout');
+            api.redirects.login();
+        } catch (error) {
+            console.log(error);
+        }
     }
 };

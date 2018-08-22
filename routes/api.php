@@ -7,6 +7,8 @@ Route::middleware('auth:api')->group(function() {
         return $request->user();
     });
 
+    Route::get('/logout', 'Auth\LoginController@logout');
+
     Route::get('/ping', function () {
         return 'pong';
     });
