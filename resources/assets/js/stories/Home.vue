@@ -4,6 +4,9 @@
             <h2 class="text-white">Home</h2>
         </div>
 
+        <router-link :to="{ name: 'login' }">Login</router-link>
+        <router-link :to="{ name: 'me' }">User</router-link>
+
         <div v-if="token">
             <p>api_token: {{ token }} </p>
             <a @click="logout" class="button is-danger">Logout</a>
@@ -16,7 +19,7 @@
     import api from '@/api';
 
     export default {
-        name: "Home",
+        name: 'Home',
         methods: {
             logout() {
                 api.auth.logout();
