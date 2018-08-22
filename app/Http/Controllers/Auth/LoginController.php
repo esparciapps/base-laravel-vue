@@ -2,10 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Guards\ApiTokenGuard;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use App\Entities\ApiToken;
 
+/**
+ * @method ApiTokenGuard guard()
+ */
 class LoginController extends Controller
 {
     use AuthenticatesUsers;
@@ -21,6 +26,16 @@ class LoginController extends Controller
 
         $user = $this->guard()->user();
 
-        return ['api_token' => $user->api_token];
+        $token = factory(ApiToken::class)->create(['user_id' => $user->id]);
+
+        return ['api_token' => $token->api_token];
+    }
+
+    public function logout()
+    {
+        $token = $this->guard()->apiToken();
+        $status = $token->delete();
+
+        return ['success' => $status];
     }
 }

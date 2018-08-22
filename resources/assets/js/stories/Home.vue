@@ -1,6 +1,8 @@
 <template>
-    <div class="container is-fluid">
-        <h1>Home</h1>
+    <div class="">
+        <div class="flex justify-center items-center h-12 bg-red">
+            <h2 class="text-white">Home</h2>
+        </div>
 
         <div v-if="token">
             <p>api_token: {{ token }} </p>
@@ -11,23 +13,20 @@
 </template>
 
 <script>
+    import api from '@/api';
+
     export default {
         name: "Home",
-        data() {
-            return {
-                token: null
-            }
-        },
         methods: {
             logout() {
-                localStorage.removeItem('api_token');
-                this.token = null;
-                this.$router.push('login');
+                api.auth.logout();
             }
         },
 
-        created() {
-            this.token = localStorage.getItem('api_token');
+        computed: {
+            token () {
+                return api.auth.token();
+            }
         }
     }
 </script>

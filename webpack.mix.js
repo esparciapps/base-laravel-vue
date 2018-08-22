@@ -1,7 +1,14 @@
-let mix = require('laravel-mix');
+const mix = require('laravel-mix');
+const tailwindcss = require('tailwindcss');
 
-mix.js('resources/assets/js/app.js', 'public/js')
-   .sass('resources/assets/sass/app.scss', 'public/css');
+
+mix.js('resources/assets/js/app.js', 'public/js');
+mix.less('resources/assets/less/app.less', 'public/css')
+mix.options({
+    postCss: [
+        tailwindcss('./tailwind.js'),
+    ]
+});
 
 if (process.env.npm_lifecycle_event !== 'hot') {
     mix.version()
