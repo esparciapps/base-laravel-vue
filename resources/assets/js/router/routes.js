@@ -1,21 +1,17 @@
-import Login from '@/stories/auth/Login';
-import Home from '@/stories/Home';
-import User from '@/stories/User';
-
 export default [
     {
         path: '/',
         name: 'home',
-        component: Home,
+        component: () => import('@/stories/Home')
     },
     {
         path: '/login',
         name: 'login',
-        component: Login,
+        component: () => import('@/stories/auth/Login')
     },
     {
         path: '/me',
         name: 'me',
-        component: User,
+        component: () => import('@/stories/User')
     },
 ];

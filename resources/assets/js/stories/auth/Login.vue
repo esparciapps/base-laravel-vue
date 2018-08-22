@@ -2,6 +2,9 @@
     <div>
         <Header subtitle="Login"/>
 
+        <router-link :to="{ name: 'home' }">Home</router-link>
+        <router-link :to="{ name: 'me' }">User</router-link>
+
         <div id="login">
             <div class="login-card">
 
@@ -47,7 +50,7 @@
     }
 </script>
 
-<style>
+<style lang="css">
     #login {
         display: flex;
         align-items: center;

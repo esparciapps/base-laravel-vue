@@ -27,6 +27,9 @@ const config = {
         alias: {
             '@': path.join(__dirname, './resources/assets/js')
         }
+    },
+    output: {
+        chunkFilename: 'js/[id].js',
     }
 };
 
