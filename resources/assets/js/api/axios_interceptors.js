@@ -33,7 +33,7 @@ axios.interceptors.response.use(
         if (status === 401) {
             console.log('#Error 401: Unauthorized');
 
-            api.auth.logout();
+            // api.auth.logout();
         }
 
         // Error 419: Token mismatch??
