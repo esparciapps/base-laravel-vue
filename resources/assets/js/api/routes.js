@@ -5,9 +5,7 @@ export default {
     logout: () => {
         return axios.get('/api/logout');
     },
-    me: {
-        get: () => {
-            return axios.get('/api/me');
-        },
-    },
+    me: () => {
+        return axios.get('/api/me');
+    }
 }

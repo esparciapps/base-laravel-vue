@@ -15,11 +15,11 @@ export default {
 
     getAuthenticatedUser: async () => {
         try {
-            const response = await api.me.get();
-
-            return response.data;
+            const response = await api.routes.me();
+            return Promise.resolve(response.data);
         } catch (error) {
             console.log(error);
+            return Promise.reject(error);
         }
     },
 
@@ -28,7 +28,7 @@ export default {
             const response = await api.routes.login(form);
             const token = response.data.api_token;
             store.commit('setToken', { token });
-            
+
             const user = await api.auth.getAuthenticatedUser();
             store.commit('setUser', { user });
 
@@ -41,7 +41,8 @@ export default {
     logout: async () => {
         try {
             await api.routes.logout();
-            store.dispatch('logout');
+            await store.dispatch('logout');
+
             api.redirects.login();
         } catch (error) {
             console.log(error);
