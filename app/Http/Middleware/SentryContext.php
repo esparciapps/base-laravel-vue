@@ -29,10 +29,18 @@ class SentryContext
                     'username' => $user->name,
                     'email' => $user->email,
                 ]);
-                
+
             } else {
                 $sentry->user_context(['id' => null]);
             }
+
+            $sentry->tags_context([
+                'browser' => \Browser::browserName(),
+                'platform' => \Browser::platformName(),
+                'device_family' => \Browser::deviceFamily(),
+                'device_model' => \Browser::deviceModel(),
+                'device_grade' => \Browser::deviceGrade(),
+            ]);
         }
 
         return $next($request);
