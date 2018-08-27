@@ -15,7 +15,7 @@ class Rest {
     async post(route, form) {    
         try {
             const { data } = await this.client.post(route, form);
-            console.log(data);
+
             return data;
         } catch (error) {
             console.log('error:', error);

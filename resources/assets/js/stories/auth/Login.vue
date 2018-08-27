@@ -41,6 +41,7 @@
                 };
 
                 await api.auth.login(data);
+                this.$router.push({name: 'home'})
             }
         }
     }

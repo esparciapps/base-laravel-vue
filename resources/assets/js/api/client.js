@@ -1,12 +1,12 @@
 import axios from 'axios';
-import auth from './modules/auth';
+import store from '@/store';
 
 function client (config) {
     const instance = axios.create(config);
 
     // Add a request interceptor
     instance.interceptors.request.use((config) => {
-        const token = auth.token();
+        const token = store.getters.token;
         config.headers.Authorization = `Bearer ${token}`;
         return config;
     }, (error) => {
