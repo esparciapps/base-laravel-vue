@@ -40,11 +40,7 @@
                     password: this.password
                 };
 
-                try {
-                    await api.auth.login(data);
-                } catch(error) {
-                    console.log(error);
-                }
+                await api.auth.login(data);
             }
         }
     }

@@ -1,27 +1,30 @@
-import routes from './routes';
-import redirects from './router_redirects';
-import interceptors from './axios_interceptors';
-import store from '@/store';
-import http from './http';
+import axios from 'axios';
 
-import auth from './modules/auth';
+import Auth from './resources/auth';
+import UserResource from './resources/user_resource';
 
-http({
-    method: 'get',
-    url: 'api/ping'
-}).then((resp) => {
-    console.log(resp);
+const config = {};
+const client = axios.create(config);
+
+// Add a request interceptor
+client.interceptors.request.use((config) => {
+    const token = Auth.token();
+    config.headers.Authorization = `Bearer ${token}`;
+    return config;
+}, (error) => {
+    return Promise.reject(error);
+});
+
+// Add a response interceptor
+client.interceptors.response.use((response) => {
+    return Promise.resolve(response);
+}, (error) => {
+    return Promise.reject(error);
 });
 
 const api = {
-    routes,
-    redirects,
-    auth,
-
-    ping: async () => {
-        const response = await axios.get('/api/ping');
-        return response;
-    }
+    auth: new Auth(client),
+    users: new UserResource(client),
 };
 
 export default api;

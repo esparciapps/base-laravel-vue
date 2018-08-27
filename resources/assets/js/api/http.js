@@ -1,22 +1,8 @@
 import axios from 'axios';
-import auth from './modules/auth2';
+import auth from './modules/auth';
 
-export const DEFAULT_HEADERS = {
-    'Access-Control-Allow-Origin': '*',
-    'X-Requested-With': 'XMLHttpRequest',
-    'Accept': 'application/json',
-    'Content-Type': 'application/json'
-};
-
-function http (config) {
-    const baseURL = config.baseUrl || 'http://base-laravel-vue.test';
-    const headers = Object.assign(DEFAULT_HEADERS, config.headers || {});
-    const apiConfig = Object.assign({
-        baseURL,
-        headers
-    }, config);
-
-    const instance = axios.create(apiConfig);
+function client (config) {
+    const instance = axios.create(config);
 
     // Add a request interceptor
     instance.interceptors.request.use((config) => {
@@ -34,7 +20,7 @@ function http (config) {
         return Promise.reject(error);
     });
 
-    return instance.request(apiConfig);
+    return instance;
 };
 
-export default http;
+export default client;

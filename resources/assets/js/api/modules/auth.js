@@ -1,5 +1,6 @@
 import store from '@/store';
-import api from '@/api';
+import routes from '@/api/routes';
+import redirects from '@/api/redirects';
 
 export default {
     token: () => {
@@ -40,9 +41,9 @@ export default {
 
     logout: async () => {
         try {
-            await api.routes.logout();
+            await routes.logout();
             store.dispatch('logout');
-            api.redirects.login();
+            redirects.login();
         } catch (error) {
             console.log(error);
         }
