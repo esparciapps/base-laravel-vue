@@ -3,6 +3,7 @@ import store from '@/store';
 
 class Auth extends Rest {
     async login (form) {
+        console.log(form);
         const data = await this.post('/login', form);
         const token = data.api_token;
         store.commit('setToken', { token });

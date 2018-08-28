@@ -49,12 +49,7 @@
         },
         methods: {
             async sendForm() {
-                const data = {
-                    email: this.email,
-                    password: this.password
-                };
-
-                await api.auth.login(data);
+                await api.auth.login(this.form);
                 this.$router.push({name: 'home'})
             }
         }
