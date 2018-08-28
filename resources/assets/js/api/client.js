@@ -11,7 +11,6 @@ instance.interceptors.request.use((config) => {
     return Promise.reject(error);
 });
 
-// Add a response interceptor
 instance.interceptors.response.use((response) => {
     return Promise.resolve(response);
 }, (error) => {

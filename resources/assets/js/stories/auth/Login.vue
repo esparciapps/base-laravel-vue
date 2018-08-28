@@ -36,6 +36,7 @@
 
 <script>
     import api from '@/api';
+    import store from '@/store';
 
     export default {
         name: "Login",
@@ -50,7 +51,12 @@
         methods: {
             async sendForm() {
                 await api.auth.login(this.form);
-                this.$router.push({name: 'home'})
+                this.$router.push({ name: 'home' });
+            }
+        },
+        created () {
+            if (store.getters.token) {
+                this.$router.push( {name: 'home' });
             }
         }
     }

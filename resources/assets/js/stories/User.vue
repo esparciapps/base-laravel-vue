@@ -58,7 +58,7 @@
         methods: {
             async ping () {
                 const response = await api.auth.ping();
-                console.log(response.data);
+                console.log(response);
             }
         }
     }
