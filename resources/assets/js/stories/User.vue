@@ -52,7 +52,7 @@
         name: "User",
         computed: {
             user () {
-                return api.auth.user();
+                return api.auth.user;
             }
         },
         methods: {

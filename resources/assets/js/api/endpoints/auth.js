@@ -2,11 +2,11 @@ import Rest from '@/api/rest';
 import store from '@/store';
 
 class Auth extends Rest {
-    token () {
+    get token () {
         return store.getters.token;
     }
 
-    user () {
+    get user () {
         return store.getters.user;
     }
 

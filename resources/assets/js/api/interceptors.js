@@ -1,5 +1,6 @@
 import store from '@/store';
 import redirects from './redirects';
+import Error from './error';
 
 const requestInterceptor = (config) => {
     const token = store.getters.token;
@@ -12,7 +13,6 @@ const requestErrorHandler = (error) => {
 };
 
 const responseInterceptor = (response) => {
-    console.log('intercepted response: ', response);
     return response;
 };
 
@@ -36,11 +36,12 @@ const responseErrorHandler = (error) => {
         console.log('#Error 419: Authentication Timeout');
     }
 
+    // Error 500: Server error
     if (status >= 500) {
         console.log('#Error 500: Internal Server Error');
     }
 
-    return Promise.reject(error);
+    return Promise.reject(new Error(status));
 };
 
 export {

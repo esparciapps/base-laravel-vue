@@ -1,7 +1,7 @@
 import Resource from '@/api/resource';
 
 class UserResource extends Resource {
-    map(response) {
+    map (response) {
         return {
             id: response.id,
             name: response.username,
@@ -9,7 +9,7 @@ class UserResource extends Resource {
         };
     }
 
-    name() {
+    name () {
         return 'users';
     }
 }
