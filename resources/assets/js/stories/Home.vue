@@ -60,7 +60,7 @@
 
         computed: {
             token () {
-                return api.auth.token();
+                return api.auth.token;
             }
         }
     }

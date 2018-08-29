@@ -52,13 +52,13 @@
         name: "User",
         computed: {
             user () {
-                return api.auth.user();
+                return api.auth.user;
             }
         },
         methods: {
             async ping () {
-                const response = await api.ping();
-                console.log(response.data);
+                const response = await api.auth.ping();
+                console.log(response);
             }
         }
     }

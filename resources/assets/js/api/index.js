@@ -1,19 +1,11 @@
-import routes from './routes';
-import redirects from './router_redirects';
-import interceptors from './axios_interceptors';
-import store from '@/store';
+import client from './client';
 
-import auth from './modules/auth';
+import Auth from './endpoints/auth';
+import UserResource from './endpoints/users';
 
 const api = {
-    routes,
-    redirects,
-    auth,
-
-    ping: async () => {
-        const response = await axios.get('/api/ping');
-        return response;
-    }
+    auth: new Auth(client),
+    users: new UserResource(client),
 };
 
 export default api;

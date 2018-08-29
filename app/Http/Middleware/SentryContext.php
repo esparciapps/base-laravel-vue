@@ -39,7 +39,6 @@ class SentryContext
                 'platform' => \Browser::platformName(),
                 'device_family' => \Browser::deviceFamily(),
                 'device_model' => \Browser::deviceModel(),
-                'device_grade' => \Browser::deviceGrade(),
             ]);
         }
 
