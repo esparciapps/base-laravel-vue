@@ -1,20 +1,15 @@
 import axios from 'axios';
-import store from '@/store';
+import { 
+    requestInterceptor, 
+    requestErrorHandler,
+    responseInterceptor,
+    responseErrorHandler
+} from './interceptors';
 
-const instance = axios.create();
+const config = {};
+const instance = axios.create(config);
 
-instance.interceptors.request.use((config) => {
-    const token = store.getters.token;
-    config.headers.Authorization = `Bearer ${token}`;
-    return config;
-}, (error) => {
-    return Promise.reject(error);
-});
-
-instance.interceptors.response.use((response) => {
-    return Promise.resolve(response);
-}, (error) => {
-    return Promise.reject(error);
-});
+instance.interceptors.request.use(requestInterceptor, requestErrorHandler);
+instance.interceptors.response.use(responseInterceptor, responseErrorHandler);
 
 export default instance;

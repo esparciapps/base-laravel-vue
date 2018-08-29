@@ -37,6 +37,7 @@
 <script>
     import api from '@/api';
     import store from '@/store';
+    import to from '@/utilities/to';
 
     export default {
         name: "Login",
@@ -50,7 +51,13 @@
         },
         methods: {
             async sendForm() {
-                await api.auth.login(this.form);
+                let error, data;
+
+                [error] = await to(api.auth.login(this.form));
+                if (error) {
+                    return;
+                }
+
                 this.$router.push({ name: 'home' });
             }
         },
