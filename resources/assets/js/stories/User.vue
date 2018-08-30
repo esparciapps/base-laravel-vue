@@ -1,61 +1,107 @@
 <template>
-    <div class="w-full h-full bg-grey-lightest">
-        <nav class="bg-grey-darkest">
-            <div class="container mx-auto px-4 py-2 flex items-center justify-between flex-wrap ">
-                <div class="flex items-center flex-no-shrink text-white mr-6">
-                    <svg class="fill-current h-8 w-8 mr-2" width="54" height="54" viewBox="0 0 54 54" xmlns="http://www.w3.org/2000/svg"><path d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 38.3c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z"/></svg>
-                    <span class="font-semibold text-xl tracking-tight">LevelApp</span>
-                </div>
-                <div class="block lg:hidden">
-                    <button class="flex items-center px-3 py-2 border rounded text-grey-lighter border-grey-light hover:text-white hover:border-white">
-                        <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
-                    </button>
-                </div>
-                <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-                    <div class="text-sm lg:flex-grow">
-                        <router-link
-                            :to="{ name: 'home' }"
-                            tag="button"
-                            class="no-underline block mt-4 lg:inline-block lg:mt-0 text-grey-lighter hover:text-white mr-4">
-                            Home
-                        </router-link>
-                        <router-link
-                            :to="{ name: 'me' }"
-                            tag="button"
-                            class="no-underline block mt-4 lg:inline-block lg:mt-0 text-grey-lighter hover:text-white mr-4">
-                            User
-                        </router-link>
-                    </div>
-                    <div>
-                        <router-link
-                            :to="{ name: 'login' }"
-                            tag="button"
-                            class="no-underline inline-block text-sm px-4 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-teal hover:bg-white mt-4 lg:mt-0">
-                            Login
-                        </router-link>
-                    </div>
-                </div>
-            </div>
-        </nav>
+    <div class="flex flex-col w-full h-full bg-grey-lightest">
+        <Navigation />
 
-        <div class="container mx-auto px-4 py-2 overflow-y-scroll">
-            <p>{{ user }}</p>
-            <button class="bg-white hover:bg-grey-lightest text-grey-darkest font-semibold py-2 px-4 border border-grey-light rounded shadow" @click="ping">Ping</button>
+        <div class="w-full flex-1 overflow-y-scroll">
+            <div class="container mx-auto max-w-sm px-4 py-8 overflow-y-scroll">
+                <form class="mb-8" @submit.prevent="updateProfile">
+                    <div class="mb-4">
+                        <h2 class="font-normal text-grey-darkest">Profile</h2>
+                        <hr class="h-px bg-grey-light">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-grey-darker text-sm font-bold mb-2" for="email">
+                            Name
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="name" type="text" placeholder="Name">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-grey-darker text-sm font-bold mb-2" for="password">
+                            Email
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker leading-tight focus:outline-none focus:shadow-outline" id="email" type="email" placeholder="Email">
+                        <!-- <p class="text-red text-xs italic">Please choose a password.</p> -->
+                    </div>
+                    <div class="">
+                        <button class="bg-green hover:bg-green-dark text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                            Update profile
+                        </button>
+                    </div>
+                </form>
+                
+                <form class="" @submit.prevent="updatePassword">
+                    <div class="mb-4">
+                        <h2 class="font-normal text-grey-darkest">Change password</h2>
+                        <hr class="h-px bg-grey-light">
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label class="block text-grey-darker text-sm font-bold mb-2" for="email">
+                            Old password
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline" id="old-password" type="password" placeholder="********">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-grey-darker text-sm font-bold mb-2" for="password">
+                            New password
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password" type="password" placeholder="********">
+                    </div>
+                    <div class="mb-6">
+                        <label class="block text-grey-darker text-sm font-bold mb-2" for="password">
+                            New password
+                        </label>
+                        <input class="shadow appearance-none border rounded w-full py-2 px-3 text-grey-darker mb-3 leading-tight focus:outline-none focus:shadow-outline" id="password-confirmation" type="password" placeholder="********">
+                        <!-- <p class="text-red text-xs italic">Please choose a password.</p> -->
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <button class="bg-grey-light hover:bg-grey-light-dark text-grey-darkest font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
+                            Update password
+                        </button>
+                        <a class="inline-block align-baseline font-bold text-sm text-blue hover:text-blue-darker" href="#">
+                            I forgot my password
+                        </a>
+                    </div>
+                </form>
+            
+            </div>
         </div>
     </div>
 </template>
 
 <script>
+    import Navigation from '@/layout/Navigation';
     import api from '@/api';
 
     export default {
         name: "User",
+        components: { Navigation },
+        data () {
+            return {
+                profileForm: {
+                    name: '',
+                    email: ''
+                },
+                passwordForm: {
+                    oldPassword: '',
+                    password: '',
+                    password_confirmation: ''
+                }
+            };
+        },
         computed: {
             user () {
                 return api.auth.user;
             }
         },
         methods: {
+            updateProfile () {
+
+            },
+            updatePassword () {
+
+            },
             async ping () {
                 const response = await api.auth.ping();
                 console.log(response);
@@ -63,7 +109,3 @@
         }
     }
 </script>
-
-<style scoped>
-
-</style>
